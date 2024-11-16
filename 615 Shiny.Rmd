@@ -1,0 +1,287 @@
+---
+title: "615 Shiny"
+author: "Zhenwei Weng"
+date: "2024-11-15"
+output: html_document
+runtime: shiny
+---
+1.
+In Hadley Wickham's Shiny example, the Hadley_1 version retrieves data directly in each output function, which is less efficient. In contrast, Hadley_2 uses a reactive expression dataset <- reactive({ get(input$dataset, "package:datasets") }) to optimize the code. It retrieves data only once when needed and caches the result to enhance response speed and application performance. This improvement reduces code duplication, simplifies the application structure, and improves maintenance efficiency.
+
+
+2.
+
+2.3.5
+
+  1.
+(a)
+verbatimTextOutput()
+(b)
+textOutput()
+(c)
+verbatimTextOutput()
+(d)
+textOutput()
+
+  2.
+```{r}
+library(shiny)
+ui <- fluidPage(
+  titlePanel("Scatterplot of Random Numbers"),
+  mainPanel(
+    tags$div(
+      role = "img",  # Define the role as an image for accessibility
+      `aria-label` = "A scatterplot of five random points with x and y coordinates drawn from a uniform distribution.",
+      plotOutput(
+        outputId = "scatterplot",
+        height = "300px",
+        width = "700px"
+      )
+    )
+  )
+)
+
+server <- function(input, output) {
+  output$scatterplot <- renderPlot({
+    set.seed(123)  # Set seed for reproducibility
+    x <- runif(5)
+    y <- runif(5)
+    plot(x, y, main = "Scatterplot of Random Numbers", xlab = "X-axis", ylab = "Y-axis", pch = 19, col = "blue")
+  })
+}
+
+shinyApp(ui = ui, server = server)
+
+```
+
+
+  3.
+```{r}
+library(shiny)
+library(DT)
+
+ui <- fluidPage(
+  DTOutput("table") 
+)
+
+server <- function(input, output, session) {
+  output$table <- renderDT(
+    mtcars,
+    options = list(
+      searching = FALSE,
+      ordering = FALSE,
+      paging = FALSE,
+      info = FALSE
+    )
+  )
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+
+  4.
+```{r}
+library(reactable)
+
+ui <- fluidPage(
+  reactableOutput("table")
+)
+
+server <- function(input, output, session) {
+  output$table <- renderReactable({
+    reactable(
+      mtcars,
+      pagination = TRUE,          # Enable pagination
+      searchable = FALSE,         # Disable the search box
+      sortable = FALSE,           # Disable column sorting
+      showPageSizeOptions = FALSE # Disable option to change number of rows displayed
+    )
+  })
+}
+
+shinyApp(ui, server)
+```
+
+
+3.3.6
+1.
+```{r}
+server1 <- function(input, output, session) {  # Corrected argument "server" to "session"
+  output$greeting <- renderText({             # Use renderText to assign output
+    paste0("Hello ", input$name)              # Access the input$name value
+  })
+}
+
+server2 <- function(input, output, session) {
+  output$greeting <- renderText({             # Use renderText for dynamic text
+    paste0("Hello ", input$name)
+  })
+}
+
+server3 <- function(input, output, session) {
+  output$greeting <- renderText({             # Correct the spelling and use renderText
+    paste0("Hello ", input$name)
+  })
+}
+```
+
+2.
+Server 1:
+
+input$a → c
+
+input$b → c
+
+c → e
+
+input$d → e
+
+e → output$f
+
+
+Server 2:
+
+input$x1 → x
+
+input$x2 → x
+
+input$x3 → x
+
+input$y1 → y
+
+input$y2 → y
+
+x → output$z
+
+y → output$z
+
+Server 3:
+
+input$x1 → x
+
+input$x2 → x
+
+input$x3 → x
+
+input$y1 → y
+
+input$y2 → y
+
+x → output$z
+
+y → output$z
+
+3.
+
+Because of naming conflict.
+Because they are conflict with base R function.
+
+
+
+4.8
+
+1.
+```{r}
+library(igraph)
+edges1 <- data.frame(
+  from = c("input$code", "selected", "selected", "selected", "selected", "summary"),
+  to = c("selected", "diag", "body_part", "location", "summary", "age_sex")
+)
+
+# 创建图
+graph1 <- graph_from_data_frame(edges1, directed = TRUE)
+
+# 绘制图
+plot(graph1, vertex.color = "lightblue", vertex.size = 30, edge.arrow.size = 0.5,
+     vertex.label.cex = 0.8, main = "Prototype Reactive Graph")
+```
+
+```{r}
+edges2 <- data.frame(
+  from = c("input$code", "selected", "selected", "selected", "selected", "summary"),
+  to = c("selected", "diag", "body_part", "location", "summary", "age_sex")
+)
+
+graph1 <- graph_from_data_frame(edges2, directed = TRUE)
+plot(graph1, vertex.color = "lightblue", vertex.size = 30, edge.arrow.size = 0.5,
+     vertex.label.cex = 0.8, main = "Prototype Reactive Graph")
+
+```
+
+```{r}
+edges3 <- data.frame(
+  from = c("input$code", "input$y", "selected", "summary"),
+  to = c("selected", "age_sex", "summary", "age_sex")
+)
+
+graph3 <- graph_from_data_frame(edges3, directed = TRUE)
+
+plot(graph3, vertex.color = "pink", vertex.size = 30, edge.arrow.size = 0.5,
+     vertex.label.cex = 0.8, main = "Rate vs Count Reactive Graph")
+```
+
+```{r}
+edges4 <- data.frame(
+  from = c("input$code", "input$story", "selected", "selected", "summary"),
+  to = c("selected", "narrative_sample", "narrative_sample", "summary", "age_sex")
+)
+graph4 <- graph_from_data_frame(edges4, directed = TRUE)
+plot(graph4, vertex.color = "lightcoral", vertex.size = 30, edge.arrow.size = 0.5,
+     vertex.label.cex = 0.8, main = "Narrative Reactive Graph")
+```
+
+
+2.
+fct_infreq() first ensures levels are sorted by frequency so that fct_lump() selects the correct top n.Flipping them leads to incorrect lumping and potentially misleading summaries.
+
+
+3.
+
+
+Add this in the code:
+
+numericInput("num_rows", "Number of rows to display:", value = 5, min = 1, max = 20)
+
+4.
+```{r}
+ui <- fluidPage(
+  fluidRow(
+    column(2, actionButton("prev_story", "Previous")),
+    column(2, actionButton("next_story", "Next")),
+    column(8, textOutput("narrative"))
+  )
+)
+server <- function(input, output, session) {
+  # Reactive value to keep track of the current index
+  current_index <- reactiveVal(1)
+  
+  # Extract narratives for the selected product
+  selected_narratives <- reactive({
+    injuries %>%
+      filter(prod_code == input$code) %>%
+      pull(narrative)
+  })
+  
+  # Update index when buttons are clicked
+  observeEvent(input$next_story, {
+    current_index((current_index() %% length(selected_narratives())) + 1)
+  })
+  
+  observeEvent(input$prev_story, {
+    current_index(ifelse(current_index() == 1, length(selected_narratives()), current_index() - 1))
+  })
+  
+  # Display the current narrative
+  output$narrative <- renderText({
+    if (length(selected_narratives()) > 0) {
+      selected_narratives()[current_index()]
+    } else {
+      "No narratives available."
+    }
+  })
+}
+
+shinyApp(ui = ui, server = server)
+
+```
