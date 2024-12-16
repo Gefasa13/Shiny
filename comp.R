@@ -2,7 +2,7 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 
-df<-read.csv("comp.csv")
+df<-read.csv("data/comp.csv")
 selected_countries <- c("MDV", "MUS", "LKA")
 
 
