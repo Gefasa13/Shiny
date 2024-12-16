@@ -6,7 +6,7 @@ df<-read.csv("data/comp.csv")
 selected_countries <- c("MDV", "MUS", "LKA")
 
 
-df_filtered <- comp %>%
+df_filtered <- df %>%
   filter(`Country.Code` %in% selected_countries) %>%
   select(`Country.Name`, `Country.Code`, `Series.Name`, `Series.Code`,
          `X2022..YR2022.`, `X2023..YR2023.`)
