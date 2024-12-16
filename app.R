@@ -6,7 +6,7 @@ library(leaflet)
 library(tidyr)
 library(DT)
 # 从指定路径加载数据
-sri_lanka_data <- read_csv("Srilanka.csv")
+sri_lanka_data <- read_csv("data/Srilanka.csv")
 
 sri_lanka_data <- sri_lanka_data %>%
   mutate(Year = as.numeric(substr(Year, 1, 4)))
