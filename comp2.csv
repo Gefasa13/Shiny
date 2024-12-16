@@ -1,0 +1,25 @@
+Country.Name,Country.Code,Series.Name,Series.Code,year,value
+Maldives,MDV,GDP (current US$),NY.GDP.MKTP.CD,2022,6177118113.94637
+Maldives,MDV,GDP (current US$),NY.GDP.MKTP.CD,2023,6590894301.9579
+Maldives,MDV,GDP growth (annual %),NY.GDP.MKTP.KD.ZG,2022,13.8260895184139
+Maldives,MDV,GDP growth (annual %),NY.GDP.MKTP.KD.ZG,2023,4.72639189000989
+Maldives,MDV,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2022,80.839
+Maldives,MDV,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2023,NA
+Maldives,MDV,"Population, total",SP.POP.TOTL,2022,524106
+Maldives,MDV,"Population, total",SP.POP.TOTL,2023,525994
+Mauritius,MUS,GDP (current US$),NY.GDP.MKTP.CD,2022,12927979286.0453
+Mauritius,MUS,GDP (current US$),NY.GDP.MKTP.CD,2023,14644524819.0054
+Mauritius,MUS,GDP growth (annual %),NY.GDP.MKTP.KD.ZG,2022,8.87988519700977
+Mauritius,MUS,GDP growth (annual %),NY.GDP.MKTP.KD.ZG,2023,6.95828740328457
+Mauritius,MUS,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2022,73.5146341463415
+Mauritius,MUS,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2023,NA
+Mauritius,MUS,"Population, total",SP.POP.TOTL,2022,1262523
+Mauritius,MUS,"Population, total",SP.POP.TOTL,2023,1261041
+Sri Lanka,LKA,GDP (current US$),NY.GDP.MKTP.CD,2022,74144870023.4244
+Sri Lanka,LKA,GDP (current US$),NY.GDP.MKTP.CD,2023,84356863743.6335
+Sri Lanka,LKA,GDP growth (annual %),NY.GDP.MKTP.KD.ZG,2022,-7.34679123599076
+Sri Lanka,LKA,GDP growth (annual %),NY.GDP.MKTP.KD.ZG,2023,-2.29801056186895
+Sri Lanka,LKA,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2022,76.61
+Sri Lanka,LKA,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,2023,NA
+Sri Lanka,LKA,"Population, total",SP.POP.TOTL,2022,22181000
+Sri Lanka,LKA,"Population, total",SP.POP.TOTL,2023,22037000
