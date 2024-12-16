@@ -14,9 +14,9 @@ sri_lanka_data <- sri_lanka_data %>%
 sri_lanka_data <- sri_lanka_data %>%
   select(-c(`Country Name`, `Country Code`, `Series Code`))
 
-comparison_data <- read_csv("comp2.csv")
+comparison_data <- read_csv("data/comp2.csv")
 
-comparison_data <- read_csv("comp2.csv") %>%
+comparison_data <- read_csv("data/comp2.csv") %>%
   filter(!is.na(`Series.Name`) & `Series.Name` != "") %>%
   mutate(year = as.numeric(year), 
          value = as.numeric(value)) %>%
